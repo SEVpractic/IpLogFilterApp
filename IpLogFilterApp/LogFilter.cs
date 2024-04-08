@@ -59,25 +59,38 @@ namespace IpLogFilterApp
             var line = await streamReader.ReadLineAsync();
             if (string.IsNullOrEmpty(line)) return false;
 
-            if (IPAddress.TryParse(line.Split(':')[0].Trim(), out IPAddress iPAddress)
+            if (IPAddress.TryParse(line.Split(':')[0].Trim(), out IPAddress ipAddress)
                 && DateTime.TryParse(line.Substring(line.IndexOf(':') + 1).Trim(), out DateTime time))
             {
                 if (SD.TimeStart >= time || SD.TimeEnd <= time) return false; //проверка временного промежутка
-                //TODO добавь фильт по IP
+                if (!IsInRange(ipAddress)) return false; //фильтр ip по необязтельным переменным диапазона
 
-                if (!ips.ContainsKey(iPAddress))
+                if (!ips.ContainsKey(ipAddress))
                 {
-                    ips.Add(iPAddress, 1);
+                    ips.Add(ipAddress, 1);
                 }
                 else
                 {
-                    ips[iPAddress]++;
+                    ips[ipAddress]++;
                 }
             }
 
             return true;
         }
 
+        private bool IsInRange(IPAddress ipForCheck)
+        {
+            if (string.IsNullOrEmpty(SD.AddressStart) || !IPAddress.TryParse(SD.AddressStart, out IPAddress startIpAddress)) return true;
+
+            uint ipAddress = BitConverter.ToUInt32(ipForCheck.GetAddressBytes(), 0);
+            uint startAddress = BitConverter.ToUInt32(startIpAddress.GetAddressBytes(), 0);
+            uint mask = 0;
+            
+            if (!string.IsNullOrEmpty(SD.AddressMask) && IPAddress.TryParse(SD.AddressMask, out IPAddress maskIpAddress))
+                mask = BitConverter.ToUInt32(maskIpAddress.GetAddressBytes(), 0);
+
+            return (ipAddress & mask) >= (startAddress & mask);
+        }
 
         /// <summary>
         /// Запись файла - отчета
