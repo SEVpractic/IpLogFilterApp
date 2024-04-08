@@ -78,6 +78,11 @@ namespace IpLogFilterApp
             return true;
         }
 
+        /// <summary>
+        /// Метод проверки ip в массиве
+        /// </summary>
+        /// <param name="ipForCheck"></param>
+        /// <returns></returns>
         private bool IsInRange(IPAddress ipForCheck)
         {
             if (string.IsNullOrEmpty(SD.AddressStart) || !IPAddress.TryParse(SD.AddressStart, out IPAddress startIpAddress)) return true;
