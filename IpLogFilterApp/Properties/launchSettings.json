@@ -2,7 +2,7 @@
   "profiles": {
     "IpLogFilterApp": {
       "commandName": "Project",
-      "commandLineArgs": "--file-log \"D:\\C# lesson\\repos\\Ip.Test.App\\Ip.Test.App\\test_log_file.txt\"\r\n--file-output \"D:\\C# lesson\\repos\\Ip.Test.App\\Ip.Test.App\\test_file_result.txt\"\r\n--address-start 10.10.10.10\r\n--address-mask маска_подсети_задающая_верхнюю_границу_диапазона_десятичное_число._Необязательный_параметр._В_случае,_если_он_не_указан,_обрабатываются_все_адреса,_начиная_с_нижней_границы_диапазона._Параметр_нельзя_использовать,_если_не_задан_address-start\r\n--time-start 01.03.2024\r\n--time-end 01.04.2024"
+      "commandLineArgs": "--file-log \"F:\\Wisebrain\\source\\repos\\IpLogFilterApp\\IpLogFilterApp\\test_log_file.txt\"\r\n--file-output \"F:\\Wisebrain\\source\\repos\\IpLogFilterApp\\IpLogFilterApp\\test_file_result.txt\"\r\n--address-start 10.10.10.10\r\n--address-mask маска_подсети_задающая_верхнюю_границу_диапазона_десятичное_число._Необязательный_параметр._В_случае,_если_он_не_указан,_обрабатываются_все_адреса,_начиная_с_нижней_границы_диапазона._Параметр_нельзя_использовать,_если_не_задан_address-start\r\n--time-start 01.03.2024\r\n--time-end 01.04.2024"
     }
   }
 }
